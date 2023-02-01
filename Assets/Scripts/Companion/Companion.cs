@@ -43,6 +43,9 @@ public class Companion : MonoBehaviour
 
                 Debug.Log("Don't leave me!");
 
+                //As the name sais, to look at the player
+                FacePlayer();
+
                 //Companion approaches player
                 transform.position = Vector3.MoveTowards(this.transform.position, player.position, speed * Time.deltaTime);
 
@@ -60,6 +63,14 @@ public class Companion : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, followRange);
+    }
+
+    private void FacePlayer()
+    {
+        if(player != null)
+        {
+            transform.LookAt(player.position);
+        }
     }
 
 }

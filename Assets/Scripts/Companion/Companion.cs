@@ -11,6 +11,12 @@ public class Companion : MonoBehaviour
     public float followRange;
     private Transform player;
 
+    public float nearPlayer;
+
+    //Player position
+    public Vector3 playerPrevPos;
+    //private bool moving = false;
+
     //Behaviour
     public enum behaviour { idle, approach}
     public behaviour companionState;
@@ -46,11 +52,16 @@ public class Companion : MonoBehaviour
                 //As the name sais, to look at the player
                 FacePlayer();
 
+
                 //Companion approaches player
                 transform.position = Vector3.MoveTowards(this.transform.position, player.position, speed * Time.deltaTime);
 
+
+                //Check if player is moving
+                //IsPlayerMoving();
+
                 //--- IDLE
-                if(distanceFromPlayer <= followRange)
+                if(distanceFromPlayer <= nearPlayer)
                 {
                     companionState= behaviour.idle;
                 }
@@ -63,6 +74,7 @@ public class Companion : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, followRange);
+        Gizmos.DrawWireSphere(transform.position, nearPlayer);
     }
 
     private void FacePlayer()
@@ -71,6 +83,28 @@ public class Companion : MonoBehaviour
         {
             transform.LookAt(player.position);
         }
+    }
+
+    private void IsPlayerMoving()
+    {
+        //Check the Player's previous position is different from its current position.
+        var isMoving = playerPrevPos != player.position;
+
+        if(isMoving)
+        {
+            //moving = true;
+            //Companion approaches player
+            transform.position = Vector3.MoveTowards(this.transform.position, player.position, speed * Time.deltaTime);
+            return;
+
+        }
+
+
+        playerPrevPos = player.position;
+        //moving = false;
+
+
+
     }
 
 }

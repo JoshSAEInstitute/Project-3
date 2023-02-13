@@ -34,7 +34,7 @@ public class Companion : MonoBehaviour
         {
             case behaviour.idle:
 
-                Debug.Log("I'm idle");
+                //Debug.Log("I'm idle");
 
                 //--- APPROACH
                 if( distanceFromPlayer >= followRange)
@@ -47,7 +47,7 @@ public class Companion : MonoBehaviour
 
             case behaviour.approach:
 
-                Debug.Log("Don't leave me!");
+                //Debug.Log("Don't leave me!");
 
                 //As the name sais, to look at the player
                 FacePlayer();

@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Companion
   - Collectible
+  - Campfire
+  - Scraps
+  - Ingredient
   layers:
   - Default
   - TransparentFX

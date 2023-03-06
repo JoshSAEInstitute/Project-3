@@ -49,7 +49,7 @@ public class Companion : MonoBehaviour
 
                 //Debug.Log("Don't leave me!");
 
-                //As the name sais, to look at the player
+                //As the name says, to look at the player
                 FacePlayer();
 
 

@@ -9,6 +9,7 @@ TagManager:
   - Campfire
   - Scraps
   - Ingredient
+  - Destination
   layers:
   - Default
   - TransparentFX

@@ -2,23 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Companion : MonoBehaviour
+public class AICompanion : MonoBehaviour
 {
-    //Movement
+
     public float speed;
 
     //Sight
     public float followRange;
     private Transform player;
+    private Transform command;
+
     public float nearPlayer;
 
     //Behaviour
-    public enum behaviour { idle, approach}
+    public enum behaviour { idle, approach, scout, recall, roam }
     public behaviour companionState;
 
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        command = GameObject.FindGameObjectWithTag("Destination").transform;
     }
 
     private void Update()
@@ -32,32 +35,60 @@ public class Companion : MonoBehaviour
                 //Debug.Log("I'm idle");
 
                 //--- APPROACH
-                if( distanceFromPlayer >= followRange)
+                if (distanceFromPlayer >= followRange)
                 {
                     companionState = behaviour.approach;
                 }
 
                 break;
 
-
             case behaviour.approach:
 
-                //Debug.Log("Don't leave me!");
+                //Debug.Log("I'm approaching");
 
                 //As the name says, to look at the player
                 FacePlayer();
 
-
                 //Companion approaches player
                 transform.position = Vector3.MoveTowards(this.transform.position, player.position, speed * Time.deltaTime);
 
-
                 //--- IDLE
-                if(distanceFromPlayer <= nearPlayer)
+                if (distanceFromPlayer <= nearPlayer)
                 {
-                    companionState= behaviour.idle;
+                    companionState = behaviour.idle;
                 }
 
+                break;
+
+            case behaviour.recall:
+
+                //Debug.Log("I've been recalled!");
+
+                //--- APPROACH
+                companionState = behaviour.approach;
+
+                break;
+
+            case behaviour.scout:
+
+                transform.position = Vector3.MoveTowards(this.transform.position, command.position, speed * Time.deltaTime);
+
+                //--- ROAM
+                if(this.transform.position == command.position)
+                {
+                    companionState = behaviour.scout;
+                }
+
+                break;
+
+            case behaviour.roam:
+
+                //Debug.Log("I'm roaming");
+
+                break;
+
+            default:
+                companionState = behaviour.idle;
                 break;
         }
     }
@@ -71,7 +102,7 @@ public class Companion : MonoBehaviour
 
     private void FacePlayer()
     {
-        if(player != null)
+        if (player != null)
         {
             transform.LookAt(player.position);
         }

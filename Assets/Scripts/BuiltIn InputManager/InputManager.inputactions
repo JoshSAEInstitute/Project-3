@@ -22,6 +22,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Scout",
+                    "type": "Button",
+                    "id": "f185db4e-e473-4108-b41b-a74d65dbf47f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -83,6 +92,45 @@
                 {
                     "name": "",
                     "id": "cec3bf8f-654d-4ce5-b411-fa7a375b98c9",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Recall",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "178678e2-e6fa-421c-9daf-1f295fa83a5b",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Scout",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Companion",
+            "id": "c39e85f1-b7c4-445e-8cb4-d2fed8b60d14",
+            "actions": [
+                {
+                    "name": "Recall",
+                    "type": "Button",
+                    "id": "1c23ee60-5a8c-40f7-8c04-f91fcf36fdbe",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "c76f0611-3558-405e-89bd-c54c43638898",
                     "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",

@@ -4,41 +4,28 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class ClickToMove : MonoBehaviour
+public class PlayerControls : MonoBehaviour
 {
-    //Input Sytem
+    //Input System
     [SerializeField] private InputAction mouseClickAction;
 
-    //Commands
-    public InputManager pcs;
-    private InputAction recall;
-
-    //Speed
+    //Player Speed
     public float playerSpeed = 10;
     public float rotationSpeed = 3;
 
     private Camera mainCamera;
     private Coroutine coroutine;
     private Vector3 targetPosition;
-
     private Rigidbody rb;
-    private AICompanion aiComp;
 
     private void Awake()
     {
-        pcs = new InputManager();
         mainCamera = Camera.main;
         rb = GetComponent<Rigidbody>();
-        aiComp = GetComponent<AICompanion>();
     }
 
     private void OnEnable()
     {
-        //Detect Spacebar press
-        recall = pcs.Player.Recall;
-        recall.Enable();
-        recall.performed += Recall;
-
         //Detect pressed mouse
         mouseClickAction.Enable();
         //Use this so that when not used we can unsubscribe for this easily
@@ -47,8 +34,6 @@ public class ClickToMove : MonoBehaviour
 
     private void OnDisable()
     {
-        recall.Disable();
-
         mouseClickAction.performed -= Move;
         mouseClickAction.Disable();
     }
@@ -68,13 +53,6 @@ public class ClickToMove : MonoBehaviour
             //Gizmos
             targetPosition = hit.point;
         }
-    }
-
-    private void Recall(InputAction.CallbackContext context)
-    {
-        Debug.Log("This works");
-        //aiComp.companionState = AICompanion.behaviour.recall;
-
     }
 
     private IEnumerator PlayerMoveTowards(Vector3 target)

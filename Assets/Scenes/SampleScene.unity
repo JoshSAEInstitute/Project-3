@@ -526,7 +526,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 581149938}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 10.101896}
+  m_LocalPosition: {x: 0, y: -0.5, z: 10.101896}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -725,6 +725,7 @@ GameObject:
   - component: {fileID: 724094277}
   - component: {fileID: 724094276}
   - component: {fileID: 724094281}
+  - component: {fileID: 724094282}
   m_Layer: 0
   m_Name: Companion
   m_TagString: Companion
@@ -842,8 +843,39 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3
   followRange: 10
+  nearCommand: 3
   nearPlayer: 3
   companionState: 0
+--- !u!114 &724094282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 724094274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: ffc698fe44e9b8748b3e92dbc7f7c61f, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &744265721
 GameObject:
   m_ObjectHideFlags: 0
@@ -1120,6 +1152,14 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: ce4d498a-cab6-4301-a513-7a6b21a16f46
     m_ActionName: Player/Recall[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f185db4e-e473-4108-b41b-a74d65dbf47f
+    m_ActionName: Player/Scout[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 1c23ee60-5a8c-40f7-8c04-f91fcf36fdbe
+    m_ActionName: Companion/Recall[/Keyboard/space]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

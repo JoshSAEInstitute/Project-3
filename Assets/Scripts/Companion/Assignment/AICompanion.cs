@@ -1,32 +1,64 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class AICompanion : MonoBehaviour
 {
 
-    public float speed;
+    public float speed = 3f;
 
     //Sight
-    public float followRange;
+    public float followRange = 10f;
     private Transform player;
-    private Transform command;
 
-    public float nearPlayer;
+    //Command
+    private Transform command;
+    public float nearCommand = 3f;
+
+    public float nearPlayer = 3f;
+
+    //Input System
+    public InputManager pcs;
+    private InputAction recall, scout;
 
     //Behaviour
     public enum behaviour { idle, approach, scout, recall, roam }
     public behaviour companionState;
 
-    private void Start()
+
+
+    private void Awake()
     {
+        pcs = new InputManager();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         command = GameObject.FindGameObjectWithTag("Destination").transform;
     }
 
-    private void Update()
+    private void OnEnable()
+    {
+        //Detect Spacebar press
+        recall = pcs.Player.Recall;
+        recall.Enable();
+        recall.performed += Recall;
+
+        //Detect Spacebar press
+        scout = pcs.Player.Scout;
+        scout.Enable();
+        scout.performed += Scout;
+    }
+
+    private void OnDisable()
+    {
+        recall.Disable();
+        scout.Disable();
+    }
+
+        private void Update()
     {
         float distanceFromPlayer = Vector3.Distance(player.position, transform.position);
+        float distanceFromCommand = Vector3.Distance(command.position, transform.position);
 
         switch (companionState)
         {
@@ -71,18 +103,20 @@ public class AICompanion : MonoBehaviour
 
             case behaviour.scout:
 
+                FaceCommand();
                 transform.position = Vector3.MoveTowards(this.transform.position, command.position, speed * Time.deltaTime);
 
                 //--- ROAM
-                if(this.transform.position == command.position)
+                if(distanceFromCommand <= nearCommand)
                 {
-                    companionState = behaviour.scout;
+                    companionState = behaviour.roam;
                 }
 
                 break;
 
             case behaviour.roam:
 
+                FacePlayer();
                 //Debug.Log("I'm roaming");
 
                 break;
@@ -106,6 +140,28 @@ public class AICompanion : MonoBehaviour
         {
             transform.LookAt(player.position);
         }
+    }
+
+    private void FaceCommand()
+    {
+        if(command != null)
+        {
+            transform.LookAt(command.position);
+        }
+    }
+
+    private void Recall(InputAction.CallbackContext context)
+    {
+        //Debug.Log("This works");
+        companionState = AICompanion.behaviour.recall;
+
+    }
+
+    private void Scout(InputAction.CallbackContext context)
+    {
+        Debug.Log("This works");
+        companionState = AICompanion.behaviour.scout;
+
     }
 
 }

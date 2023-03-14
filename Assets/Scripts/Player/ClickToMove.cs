@@ -73,7 +73,7 @@ public class ClickToMove : MonoBehaviour
     private void Recall(InputAction.CallbackContext context)
     {
         Debug.Log("This works");
-        aiComp.companionState = AICompanion.behaviour.recall;
+        //aiComp.companionState = AICompanion.behaviour.recall;
 
     }
 

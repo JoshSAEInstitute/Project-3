@@ -65,6 +65,7 @@ public class AICompanion : MonoBehaviour
             case behaviour.idle:
 
                 //Debug.Log("I'm idle");
+                FacePlayer();
 
                 //--- APPROACH
                 if (distanceFromPlayer >= followRange)
@@ -132,6 +133,7 @@ public class AICompanion : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, followRange);
         Gizmos.DrawWireSphere(transform.position, nearPlayer);
+
     }
 
     private void FacePlayer()

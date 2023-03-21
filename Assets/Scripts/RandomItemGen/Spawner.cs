@@ -28,7 +28,7 @@ public class Spawner : MonoBehaviour
     {
         //Place where to spawn the items
         Vector3 randomPos = new Vector3(Random.Range(-itemX, itemX), itemY / 2, Random.Range(-itemZ, itemZ));
-        Instantiate(itemToSpawn, randomPos, Quaternion.identity);
+        GameObject clone = Instantiate(itemToSpawn, randomPos, Quaternion.identity);
     }
 
     private void OnDrawGizmos()

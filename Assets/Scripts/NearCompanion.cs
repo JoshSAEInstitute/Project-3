@@ -11,6 +11,7 @@ public class NearCompanion : MonoBehaviour
     Renderer rend;
 
     private float compSight = 10f;
+    public float waitTime = 60f;
 
     private void Start()
     {
@@ -18,6 +19,8 @@ public class NearCompanion : MonoBehaviour
         rend.enabled = true;
         rend.sharedMaterial = material[0];
         companion = GameObject.FindGameObjectWithTag("Companion").transform;
+
+        Destroy(gameObject, waitTime);
 
     }
 

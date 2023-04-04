@@ -72,11 +72,11 @@ public class RoomSpawner : MonoBehaviour
     {
         if (other.CompareTag("Spawner"))
         {
-            Debug.Log("Check if has spawner: " + other);
+            //Debug.Log("Check if has spawner: " + other);
             if (other.GetComponent<RoomSpawner>().spawned == false && spawned == false)
             {
                 Instantiate(inventory.closedPath, transform.position, Quaternion.identity);
-                Debug.Log("Check if both are false: " + other);
+                //Debug.Log("Check if both are false: " + other);
             }
             spawned= true;
         }

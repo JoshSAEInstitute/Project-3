@@ -15,7 +15,7 @@ public class AICompanion : MonoBehaviour
 
     //Command
     private Transform command;
-    public float nearCommand = 3f;
+    public float nearCommand = 5f;
 
     public float nearPlayer = 3f;
 

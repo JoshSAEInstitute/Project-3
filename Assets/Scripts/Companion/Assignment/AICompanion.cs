@@ -29,15 +29,18 @@ public class AICompanion : MonoBehaviour
 
     //Sensor
     private Collider sensor;
-    private CompInventory inventory;
+    public CompInventory inventory;
+    //private Collider other;
 
-
+    //Independent
+    public bool collect = false;
 
     private void Awake()
     {
         pcs = new InputManager();
     }
-
+    
+    #region New Input System
     private void OnEnable()
     {
         //Detect Spacebar press
@@ -56,13 +59,15 @@ public class AICompanion : MonoBehaviour
         recall.Disable();
         scout.Disable();
     }
+    #endregion
 
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         command = GameObject.FindGameObjectWithTag("Destination").transform;
         sensor = GameObject.FindGameObjectWithTag("Sensor").GetComponent<Collider>();
-        inventory = GameObject.FindGameObjectWithTag("Sensor").GetComponent<CompInventory>();
+        //inventory = GameObject.FindGameObjectWithTag("Sensor").GetComponent<CompInventory>();
+        inventory = GetComponent<CompInventory>();
     }
 
     private void Update()
@@ -129,8 +134,12 @@ public class AICompanion : MonoBehaviour
 
                 FacePlayer();
                 //Debug.Log("I'm roaming");
-
-                inventory.OnTriggerStay();
+                if(collect == true)
+                {
+                    
+                    Debug.Log("Need to start collecting");
+                }
+                //inventory.OnTriggerEnter(other);
 
                 break;
 
@@ -148,6 +157,8 @@ public class AICompanion : MonoBehaviour
 
     }
 
+    #region Facing Something
+
     private void FacePlayer()
     {
         if (player != null)
@@ -164,6 +175,10 @@ public class AICompanion : MonoBehaviour
         }
     }
 
+    #endregion
+
+    #region Input Commands
+
     private void Recall(InputAction.CallbackContext context)
     {
         //Debug.Log("This works");
@@ -173,11 +188,12 @@ public class AICompanion : MonoBehaviour
 
     private void Scout(InputAction.CallbackContext context)
     {
-        Debug.Log("This works");
+        //Debug.Log("This works");
         companionState = AICompanion.behaviour.scout;
 
     }
 
-    
+    #endregion
+
 
 }

@@ -845,6 +845,8 @@ MonoBehaviour:
   nearCommand: 3
   nearPlayer: 3
   companionState: 0
+  inventory: {fileID: 0}
+  collect: 0
 --- !u!114 &724094282
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2002,6 +2004,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1489316066}
   - component: {fileID: 1489316067}
+  - component: {fileID: 1489316068}
   m_Layer: 0
   m_Name: CompanionSense
   m_TagString: Sensor
@@ -2033,10 +2036,25 @@ SphereCollider:
   m_GameObject: {fileID: 1489316065}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Radius: 10
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1489316068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1489316065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92ff8d59773a9094c85833648dc77d36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ingredients: []
+  ingredientLocation: {x: 0, y: 0, z: 0}
+  companion: {fileID: 0}
 --- !u!1 &1544255597
 GameObject:
   m_ObjectHideFlags: 0
@@ -8015,10 +8033,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4069571, guid: a023e2de199847041963144c4c7fd311, type: 3}
-      propertyPath: waitTime
-      value: 60
-      objectReference: {fileID: 0}
     - target: {fileID: 8804911822547147675, guid: a023e2de199847041963144c4c7fd311, type: 3}
       propertyPath: m_Name
       value: Collectible
@@ -8067,14 +8081,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8804911822547147751, guid: a023e2de199847041963144c4c7fd311, type: 3}
-      propertyPath: m_Materials.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8804911822547147751, guid: a023e2de199847041963144c4c7fd311, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 75ccdd957521931469d32e879fc6b81f, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a023e2de199847041963144c4c7fd311, type: 3}
 --- !u!33 &8881003833502824110

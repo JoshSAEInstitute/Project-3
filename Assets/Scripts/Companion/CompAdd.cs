@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CompAdd : MonoBehaviour
 {
-
+    //Add to list
     private CompInventory compInventory;
 
     private void Start()

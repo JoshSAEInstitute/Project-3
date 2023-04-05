@@ -11,7 +11,11 @@ public class NearCompanion : MonoBehaviour
     Renderer rend;
 
     private float compSight = 10f;
-    public float waitTime = 60f;
+    public float waitTime = 5f;
+
+    //Remove from list
+    private CompInventory compInventory;
+    //private bool completed = false;
 
     private void Start()
     {
@@ -20,9 +24,8 @@ public class NearCompanion : MonoBehaviour
         rend.sharedMaterial = material[0];
         companion = GameObject.FindGameObjectWithTag("Companion").transform;
 
-        Destroy(gameObject, waitTime);
-
     }
+
 
     private void Update()
     {
@@ -35,6 +38,18 @@ public class NearCompanion : MonoBehaviour
         {
             rend.sharedMaterial = material[0];
         }
+
+        if (waitTime <= 0)
+        {
+            compInventory = GameObject.FindGameObjectWithTag("Sensor").GetComponent<CompInventory>();
+            compInventory.ingredients.Remove(this.gameObject);
+            Destroy(gameObject);
+        }
+        else
+        {
+            waitTime -= Time.deltaTime;
+        }
+
     }
 
 }

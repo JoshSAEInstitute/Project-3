@@ -10,6 +10,9 @@ TagManager:
   - Scraps
   - Ingredient
   - Destination
+  - Paths
+  - Spawner
+  - Sensor
   layers:
   - Default
   - TransparentFX

@@ -27,13 +27,15 @@ public class AICompanion : MonoBehaviour
     public enum behaviour { idle, approach, scout, recall, roam }
     public behaviour companionState;
 
+    //Sensor
+    private Collider sensor;
+    private CompInventory inventory;
+
 
 
     private void Awake()
     {
         pcs = new InputManager();
-        player = GameObject.FindGameObjectWithTag("Player").transform;
-        command = GameObject.FindGameObjectWithTag("Destination").transform;
     }
 
     private void OnEnable()
@@ -55,7 +57,15 @@ public class AICompanion : MonoBehaviour
         scout.Disable();
     }
 
-        private void Update()
+    private void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+        command = GameObject.FindGameObjectWithTag("Destination").transform;
+        sensor = GameObject.FindGameObjectWithTag("Sensor").GetComponent<Collider>();
+        inventory = GameObject.FindGameObjectWithTag("Sensor").GetComponent<CompInventory>();
+    }
+
+    private void Update()
     {
         float distanceFromPlayer = Vector3.Distance(player.position, transform.position);
         float distanceFromCommand = Vector3.Distance(command.position, transform.position);
@@ -120,6 +130,8 @@ public class AICompanion : MonoBehaviour
                 FacePlayer();
                 //Debug.Log("I'm roaming");
 
+                inventory.OnTriggerStay();
+
                 break;
 
             default:
@@ -165,5 +177,7 @@ public class AICompanion : MonoBehaviour
         companionState = AICompanion.behaviour.scout;
 
     }
+
+    
 
 }

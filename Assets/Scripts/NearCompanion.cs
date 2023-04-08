@@ -7,22 +7,24 @@ public class NearCompanion : MonoBehaviour
 
     private Transform companion;
 
+    //Materials
     public Material[] material;
     Renderer rend;
 
     private float compSight = 10f;
-    public float waitTime = 5f;
 
-    //Remove from list
-    private CompInventory compInventory;
-    //private bool completed = false;
+    //Access player's Item collector
+    private ItemCollector itemCollector;
 
     private void Start()
     {
+        //Manipulates how the object looks like
         rend = GetComponent<Renderer>();
         rend.enabled = true;
         rend.sharedMaterial = material[0];
         companion = GameObject.FindGameObjectWithTag("Companion").transform;
+
+        itemCollector = GameObject.FindGameObjectWithTag("Player").GetComponent<ItemCollector>();
 
     }
 
@@ -31,6 +33,7 @@ public class NearCompanion : MonoBehaviour
     {
         float distanceFromCompanion = Vector3.Distance(companion.position, transform.position);
 
+        //Changes renderer colour depending on how close the companion is
         if(distanceFromCompanion <= compSight)
         {
             rend.sharedMaterial = material[1]; 
@@ -39,17 +42,15 @@ public class NearCompanion : MonoBehaviour
             rend.sharedMaterial = material[0];
         }
 
-        if (waitTime <= 0)
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.CompareTag("Companion"))
         {
-            compInventory = GameObject.FindGameObjectWithTag("Sensor").GetComponent<CompInventory>();
-            compInventory.ingredients.Remove(this.gameObject);
+            itemCollector.IncreaseIngredients(1);
             Destroy(gameObject);
         }
-        else
-        {
-            waitTime -= Time.deltaTime;
-        }
-
     }
 
 }

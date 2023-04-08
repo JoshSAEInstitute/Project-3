@@ -28,7 +28,6 @@ public class AICompanion : MonoBehaviour
     public behaviour companionState;
 
     //Sensor
-    private Collider sensor;
     public CompInventory inventory;
     //private Collider other;
 
@@ -65,7 +64,6 @@ public class AICompanion : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         command = GameObject.FindGameObjectWithTag("Destination").transform;
-        sensor = GameObject.FindGameObjectWithTag("Sensor").GetComponent<Collider>();
         //inventory = GameObject.FindGameObjectWithTag("Sensor").GetComponent<CompInventory>();
         inventory = GetComponent<CompInventory>();
     }

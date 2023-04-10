@@ -46,6 +46,7 @@ public class NearCompanion : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        //Companion collects item
         if(other.gameObject.CompareTag("Companion"))
         {
             itemCollector.IncreaseIngredients(1);

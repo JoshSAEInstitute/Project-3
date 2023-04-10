@@ -7,11 +7,14 @@ using UnityEngine.InputSystem;
 public class AICompanion : MonoBehaviour
 {
 
-    public float speed = 3f;
+    private float speed;
+    [SerializeField] private float initialSpeed = 5f;
+    [SerializeField] private float dashingSpeed = 8f;
 
     //Sight
     public float followRange = 10f;
     private Transform player;
+    [SerializeField] private float wayTooFar = 20f;
 
     //Command
     private Transform command;
@@ -66,6 +69,8 @@ public class AICompanion : MonoBehaviour
         command = GameObject.FindGameObjectWithTag("Destination").transform;
         //inventory = GameObject.FindGameObjectWithTag("Sensor").GetComponent<CompInventory>();
         inventory = GetComponent<CompInventory>();
+
+        speed = initialSpeed;
     }
 
     private void Update()
@@ -101,6 +106,7 @@ public class AICompanion : MonoBehaviour
                 //--- IDLE
                 if (distanceFromPlayer <= nearPlayer)
                 {
+                    speed = initialSpeed;
                     companionState = behaviour.idle;
                 }
 
@@ -109,6 +115,7 @@ public class AICompanion : MonoBehaviour
             case behaviour.recall:
 
                 //Debug.Log("I've been recalled!");
+                speed = dashingSpeed;
 
                 //--- APPROACH
                 companionState = behaviour.approach;
@@ -118,11 +125,13 @@ public class AICompanion : MonoBehaviour
             case behaviour.scout:
 
                 FaceCommand();
+                speed = dashingSpeed;
                 transform.position = Vector3.MoveTowards(this.transform.position, command.position, speed * Time.deltaTime);
 
                 //--- ROAM
                 if(distanceFromCommand <= nearCommand)
                 {
+                    speed = initialSpeed;
                     companionState = behaviour.roam;
                 }
 
@@ -139,6 +148,11 @@ public class AICompanion : MonoBehaviour
                 }
                 //inventory.OnTriggerEnter(other);
 
+                if(distanceFromPlayer >= wayTooFar)
+                {
+                    companionState = behaviour.recall;
+                }
+
                 break;
 
             default:
@@ -152,6 +166,7 @@ public class AICompanion : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, followRange);
         Gizmos.DrawWireSphere(transform.position, nearPlayer);
+        Gizmos.DrawWireSphere(transform.position, wayTooFar);
 
     }
 

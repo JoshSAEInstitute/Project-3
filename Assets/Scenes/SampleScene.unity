@@ -827,12 +827,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37004e6c8585d5e40b3a7addfac0cc98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  initialSpeed: 5
+  dashingSpeed: 8
   followRange: 10
+  wayTooFar: 20
   nearCommand: 3
   nearPlayer: 3
   companionState: 0
   inventory: {fileID: 0}
+  initialWaitTime: 2
   collect: 0
 --- !u!114 &724094282
 MonoBehaviour:
@@ -877,7 +880,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ingredients: []
-  companion: {fileID: 0}
+  companion: {fileID: 724094281}
 --- !u!136 &724094285
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -906,7 +909,6 @@ GameObject:
   - component: {fileID: 773657000}
   - component: {fileID: 773656999}
   - component: {fileID: 773657005}
-  - component: {fileID: 773657004}
   - component: {fileID: 773657006}
   - component: {fileID: 773657007}
   - component: {fileID: 773657008}
@@ -1015,19 +1017,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &773657004
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 773656998}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3dbb8806559ca34ea965833a4c389cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 5
 --- !u!114 &773657005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1055,7 +1044,7 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 773657004}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
         m_MethodName: Move
         m_Mode: 0
@@ -1116,7 +1105,7 @@ MonoBehaviour:
       m_Flags: 0
     m_Flags: 0
   playerSpeed: 5
-  rotationSpeed: 5
+  rotationSpeed: 10
 --- !u!114 &773657007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7987,6 +7976,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4069571, guid: a023e2de199847041963144c4c7fd311, type: 3}
+      propertyPath: waitTime
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 8804911822547147675, guid: a023e2de199847041963144c4c7fd311, type: 3}
       propertyPath: m_Name
       value: Collectible

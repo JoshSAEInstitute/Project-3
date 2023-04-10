@@ -30,8 +30,13 @@ public class AICompanion : MonoBehaviour
     public enum behaviour { idle, approach, scout, recall, roam }
     public behaviour companionState;
 
-    //Sensor
+    //Companion Inventory
     public CompInventory inventory;
+    private int rand;
+    private int lockOnItem;
+    private Transform lockOnLocation;
+    private float waitTime;
+    [SerializeField]private float initialWaitTime = 5f;
     //private Collider other;
 
     //Independent
@@ -71,6 +76,7 @@ public class AICompanion : MonoBehaviour
         inventory = GetComponent<CompInventory>();
 
         speed = initialSpeed;
+        waitTime = initialWaitTime;
     }
 
     private void Update()
@@ -139,15 +145,36 @@ public class AICompanion : MonoBehaviour
 
             case behaviour.roam:
 
-                FacePlayer();
-                //Debug.Log("I'm roaming");
-                if(collect == true)
-                {
-                    
-                    Debug.Log("Need to start collecting");
-                }
-                //inventory.OnTriggerEnter(other);
 
+
+                if(inventory.ingredients.Count > 0 )
+                {
+                    //Selects random value to lock on to
+                    if (waitTime <= 0)
+                    {
+                        rand = Random.Range(0, inventory.ingredients.Count);
+                        waitTime = initialWaitTime;
+                    } else
+                    {
+                        waitTime -= Time.deltaTime;
+                    }
+                    lockOnLocation = inventory.ingredients[rand];
+                    //Moves towards the locked on item
+                    if(lockOnLocation != null)
+                    {
+                        transform.LookAt(lockOnLocation.position);
+                        transform.position = Vector3.MoveTowards(this.transform.position, lockOnLocation.position, speed * Time.deltaTime);
+                    }
+
+                }
+
+                if(inventory.ingredients.Count == 0)
+                {
+                    FacePlayer();
+                }
+
+
+                //--- RECALL
                 if(distanceFromPlayer >= wayTooFar)
                 {
                     companionState = behaviour.recall;

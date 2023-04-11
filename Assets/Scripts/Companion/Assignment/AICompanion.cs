@@ -81,8 +81,11 @@ public class AICompanion : MonoBehaviour
 
     private void Update()
     {
-        float distanceFromPlayer = Vector3.Distance(player.position, transform.position);
-        float distanceFromCommand = Vector3.Distance(command.position, transform.position);
+        //Ignores collision with the player
+        Physics.IgnoreCollision(this.GetComponent<Collider>(), GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>(), true);
+
+        float distanceFromPlayer = Vector2.Distance(player.position, transform.position);
+        float distanceFromCommand = Vector2.Distance(command.position, transform.position);
 
         switch (companionState)
         {

@@ -43,25 +43,25 @@ public class RoomSpawner : MonoBehaviour
                 //Choose a random value in the bottomPath array
                 rand = Random.Range(0, inventory.bottomPath.Length);
                 //Which is then instantiated at the spawner location with no rotation
-                Instantiate(inventory.bottomPath[rand], transform.position, Quaternion.identity);
+                Instantiate(inventory.bottomPath[rand], transform.position, inventory.bottomPath[rand].transform.rotation);
             }
             else if (pathDirection == 2)
             {
                 // Spawn room with a LEFT path
                 rand = Random.Range(0, inventory.leftPath.Length);
-                Instantiate(inventory.leftPath[rand], transform.position, Quaternion.identity);
+                Instantiate(inventory.leftPath[rand], transform.position, inventory.leftPath[rand].transform.rotation);
             }
             else if (pathDirection == 3)
             {
                 // Spawn room with an UPPER path
                 rand = Random.Range(0, inventory.upperPath.Length);
-                Instantiate(inventory.upperPath[rand], transform.position, Quaternion.identity);
+                Instantiate(inventory.upperPath[rand], transform.position, inventory.upperPath[rand].transform.rotation);
             }
             else if (pathDirection == 4)
             {
                 // Spawn room with a RIGHT path
                 rand = Random.Range(0, inventory.rightPath.Length);
-                Instantiate(inventory.rightPath[rand], transform.position, Quaternion.identity);
+                Instantiate(inventory.rightPath[rand], transform.position, inventory.rightPath[rand].transform.rotation);
             }
             spawned = true;
         }

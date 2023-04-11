@@ -54,7 +54,7 @@ public class NearCompanion : MonoBehaviour
             waitTime -= Time.deltaTime;
         }
 
-        float distanceFromCompanion = Vector3.Distance(companion.position, transform.position);
+        float distanceFromCompanion = Vector2.Distance(companion.position, transform.position);
 
         //Changes renderer colour depending on how close the companion is
         if(distanceFromCompanion <= compSight)

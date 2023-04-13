@@ -53,6 +53,15 @@ public partial class @InputManager : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""FireMaker"",
+                    ""type"": ""Button"",
+                    ""id"": ""67492d23-2b4a-4414-89a3-2956132bfc95"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -135,12 +144,45 @@ public partial class @InputManager : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""3ff65be7-c7da-4198-816c-1114066f172f"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Recall"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""178678e2-e6fa-421c-9daf-1f295fa83a5b"",
                     ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Scout"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""74ef7c0a-fa89-40f9-ae67-9a1574b10f0d"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Scout"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fcca3ae9-0c9e-48cd-b529-c872029881d0"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FireMaker"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -182,6 +224,7 @@ public partial class @InputManager : IInputActionCollection2, IDisposable
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Recall = m_Player.FindAction("Recall", throwIfNotFound: true);
         m_Player_Scout = m_Player.FindAction("Scout", throwIfNotFound: true);
+        m_Player_FireMaker = m_Player.FindAction("FireMaker", throwIfNotFound: true);
         // Companion
         m_Companion = asset.FindActionMap("Companion", throwIfNotFound: true);
         m_Companion_Recall = m_Companion.FindAction("Recall", throwIfNotFound: true);
@@ -247,6 +290,7 @@ public partial class @InputManager : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Recall;
     private readonly InputAction m_Player_Scout;
+    private readonly InputAction m_Player_FireMaker;
     public struct PlayerActions
     {
         private @InputManager m_Wrapper;
@@ -254,6 +298,7 @@ public partial class @InputManager : IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Recall => m_Wrapper.m_Player_Recall;
         public InputAction @Scout => m_Wrapper.m_Player_Scout;
+        public InputAction @FireMaker => m_Wrapper.m_Player_FireMaker;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -272,6 +317,9 @@ public partial class @InputManager : IInputActionCollection2, IDisposable
                 @Scout.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnScout;
                 @Scout.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnScout;
                 @Scout.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnScout;
+                @FireMaker.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFireMaker;
+                @FireMaker.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFireMaker;
+                @FireMaker.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFireMaker;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -285,6 +333,9 @@ public partial class @InputManager : IInputActionCollection2, IDisposable
                 @Scout.started += instance.OnScout;
                 @Scout.performed += instance.OnScout;
                 @Scout.canceled += instance.OnScout;
+                @FireMaker.started += instance.OnFireMaker;
+                @FireMaker.performed += instance.OnFireMaker;
+                @FireMaker.canceled += instance.OnFireMaker;
             }
         }
     }
@@ -327,6 +378,7 @@ public partial class @InputManager : IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnRecall(InputAction.CallbackContext context);
         void OnScout(InputAction.CallbackContext context);
+        void OnFireMaker(InputAction.CallbackContext context);
     }
     public interface ICompanionActions
     {

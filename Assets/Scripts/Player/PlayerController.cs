@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
 
     [SerializeField] private float movingSpeed = 5f;
-    [SerializeField] private float rotationSpeed = 5f;
+    //[SerializeField] private float rotationSpeed = 5f;
     public Vector2 dirMove;
     private Vector2 dirRotation;
 
@@ -22,28 +22,33 @@ public class PlayerController : MonoBehaviour
     {
         dirMove = value.Get<Vector2>();
         rb.velocity =  dirMove * movingSpeed;
+    }
 
+    private void Update()
+    {
         updateModel();
+
+        //Debug.Log("x: " + dirMove.x + " |y: " + dirMove.y);
     }
 
     private void updateModel()
     {
-        if(dirMove.x > 0f)
+        if(rb.velocity.x > 0f)
         {
 
-            transform.localEulerAngles = new Vector2(dirRotation.x, 90);
+            transform.localEulerAngles = new Vector3(0, 90, -90);
 
-        } else if (dirMove.x < 0f)
+        } else if (rb.velocity.x < 0f)
         {
-            transform.localEulerAngles = new Vector2(dirRotation.x, -90);
+            transform.localEulerAngles = new Vector3(0, -90, 90);
         }
 
-        if(dirMove.y > 0f)
+        if(rb.velocity.y > 0f)
         {
-            transform.localEulerAngles = new Vector2(dirRotation.x, dirRotation.y);
-        } else if(dirMove.y < 0f)
+            transform.localEulerAngles = new Vector3(-90, 0, 0);
+        } else if(rb.velocity.y < 0f)
         {
-            transform.localEulerAngles = new Vector2(dirRotation.x, dirRotation.y);
+            transform.localEulerAngles = new Vector3(90, 180, 0);
         }
     }
 

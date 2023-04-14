@@ -5,6 +5,8 @@ using UnityEngine;
 public class Campfire : MonoBehaviour
 {
 
+    [SerializeField] private int ingredientsAmount;
+
     private void OnTriggerEnter(Collider other)
     {
 
@@ -17,14 +19,15 @@ public class Campfire : MonoBehaviour
             if(other.GetComponent<ItemCollector>() != null)
             {
                 ItemCollector collectible = other.GetComponent<ItemCollector>();
-                if(collectible.ingredients >= 3)
+                if(collectible.ingredients >= ingredientsAmount)
                 {
                     Debug.Log("You have collected lots ingredients");
 
-                    collectible.ingredients = collectible.ingredients - 3;
-                    collectible.food++;
+                    //Decrease ingredients to make 1 food
+                    collectible.IncreaseIngredients(-ingredientsAmount);
+                    collectible.IncreaseFood(1);
 
-                } else if(collectible.ingredients < 3)
+                } else if(collectible.ingredients < ingredientsAmount)
                 {
                     Debug.Log("Collect more ingredient");
                 }

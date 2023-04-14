@@ -13,7 +13,7 @@ public class StaminaPlayer : MonoBehaviour
     //HUNGER
     //How long before the player gets hungry
     [SerializeField] private float hungerCD = 3;
-    [SerializeField] private float waitTime;
+    private float waitTime;
 
     //Checks food
     private ItemCollector food;

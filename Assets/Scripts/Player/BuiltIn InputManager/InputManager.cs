@@ -185,6 +185,17 @@ public partial class @InputManager : IInputActionCollection2, IDisposable
                     ""action"": ""FireMaker"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e03bc925-e86f-48d8-976e-96ca9c6ac559"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FireMaker"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },

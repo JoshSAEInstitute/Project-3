@@ -28,7 +28,8 @@ public class PathInventory : MonoBehaviour
             {
                 if(i == paths.Count - 1)
                 {
-                    Instantiate(endPath, paths[i].transform.position, Quaternion.identity);
+                    //Instantiate(endPath, paths[i].transform.position, Quaternion.identity);
+                    Instantiate(endPath, new Vector3(paths[i].transform.position.x, paths[i].transform.position.y, 0f), Quaternion.identity);
                     spawnedEndPath = true;
                 }
             }

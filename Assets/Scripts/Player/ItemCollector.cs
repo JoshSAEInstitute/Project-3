@@ -54,6 +54,14 @@ public class ItemCollector : MonoBehaviour
     {
         ingredients = ingredients + amount;
         ingredientsText.text = "Ingredients: ".ToString() + ingredients.ToString();
+        foodText.text = "Food: ".ToString() + food.ToString();
+    }
+
+    public void IncreaseFood(int amount)
+    {
+        food = food + amount;
+        ingredientsText.text = "Ingredients: ".ToString() + ingredients.ToString();
+        foodText.text = "Food: ".ToString() + food.ToString();
     }
 
 }

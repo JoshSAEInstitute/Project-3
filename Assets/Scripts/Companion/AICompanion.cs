@@ -33,7 +33,6 @@ public class AICompanion : MonoBehaviour
     //Companion Inventory
     public CompInventory inventory;
     private int rand;
-    private int lockOnItem;
     private Transform lockOnLocation;
     private float waitTime;
     [SerializeField]private float initialWaitTime = 5f;
@@ -82,6 +81,7 @@ public class AICompanion : MonoBehaviour
     private void Update()
     {
         //Ignores collision with the player
+        //!!!Note to self, for some reason this doesn't work!!!!
         Physics.IgnoreCollision(this.GetComponent<Collider>(), GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>(), true);
 
         float distanceFromPlayer = Vector2.Distance(player.position, transform.position);
@@ -149,7 +149,7 @@ public class AICompanion : MonoBehaviour
             case behaviour.roam:
 
 
-
+                //Gathers ingredients next to it
                 if(inventory.ingredients.Count > 0 )
                 {
                     //Selects random value to lock on to

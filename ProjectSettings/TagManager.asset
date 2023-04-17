@@ -13,6 +13,8 @@ TagManager:
   - Paths
   - Spawner
   - Sensor
+  - Escape
+  - ItemSpawner
   layers:
   - Default
   - TransparentFX

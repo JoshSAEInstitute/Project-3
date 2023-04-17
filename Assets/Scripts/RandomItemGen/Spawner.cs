@@ -11,8 +11,8 @@ public class Spawner : MonoBehaviour
     private float nextSpawn;
     public float spawnRate = 1;
 
-    [SerializeField] private float itemX = 20f;
-    [SerializeField] private float itemY = 20f;
+    public float itemX = 20f;
+    public float itemY = 20f;
 
     private void Update()
     {
@@ -30,10 +30,12 @@ public class Spawner : MonoBehaviour
         GameObject clone = Instantiate(itemToSpawn, randomPos, itemToSpawn.transform.rotation);
     }
 
+    
     private void OnDrawGizmos()
     {
         Gizmos.color = new Color(0,0,1,0.3f);
-        Gizmos.DrawCube(transform.position, new Vector2(itemX, itemY));
+        Gizmos.DrawCube(transform.position, new Vector2((itemX + -itemX)/2, (itemY + -itemY)/2));
     }
+    
 
 }

@@ -62,6 +62,15 @@ public partial class @InputManager : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""c278dbda-a3a0-4fce-b1f0-69bb87581ad7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -196,6 +205,17 @@ public partial class @InputManager : IInputActionCollection2, IDisposable
                     ""action"": ""FireMaker"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""517f7764-2116-4e16-92eb-2e4f48ebaddd"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -236,6 +256,7 @@ public partial class @InputManager : IInputActionCollection2, IDisposable
         m_Player_Recall = m_Player.FindAction("Recall", throwIfNotFound: true);
         m_Player_Scout = m_Player.FindAction("Scout", throwIfNotFound: true);
         m_Player_FireMaker = m_Player.FindAction("FireMaker", throwIfNotFound: true);
+        m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
         // Companion
         m_Companion = asset.FindActionMap("Companion", throwIfNotFound: true);
         m_Companion_Recall = m_Companion.FindAction("Recall", throwIfNotFound: true);
@@ -302,6 +323,7 @@ public partial class @InputManager : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Recall;
     private readonly InputAction m_Player_Scout;
     private readonly InputAction m_Player_FireMaker;
+    private readonly InputAction m_Player_Pause;
     public struct PlayerActions
     {
         private @InputManager m_Wrapper;
@@ -310,6 +332,7 @@ public partial class @InputManager : IInputActionCollection2, IDisposable
         public InputAction @Recall => m_Wrapper.m_Player_Recall;
         public InputAction @Scout => m_Wrapper.m_Player_Scout;
         public InputAction @FireMaker => m_Wrapper.m_Player_FireMaker;
+        public InputAction @Pause => m_Wrapper.m_Player_Pause;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -331,6 +354,9 @@ public partial class @InputManager : IInputActionCollection2, IDisposable
                 @FireMaker.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFireMaker;
                 @FireMaker.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFireMaker;
                 @FireMaker.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFireMaker;
+                @Pause.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
+                @Pause.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
+                @Pause.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -347,6 +373,9 @@ public partial class @InputManager : IInputActionCollection2, IDisposable
                 @FireMaker.started += instance.OnFireMaker;
                 @FireMaker.performed += instance.OnFireMaker;
                 @FireMaker.canceled += instance.OnFireMaker;
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
             }
         }
     }
@@ -390,6 +419,7 @@ public partial class @InputManager : IInputActionCollection2, IDisposable
         void OnRecall(InputAction.CallbackContext context);
         void OnScout(InputAction.CallbackContext context);
         void OnFireMaker(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
     public interface ICompanionActions
     {

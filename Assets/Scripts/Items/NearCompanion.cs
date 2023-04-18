@@ -69,7 +69,7 @@ public class NearCompanion : MonoBehaviour
                 stored = true;
             }
 
-        } else
+        } else 
         {
             rend.sharedMaterial = material[0];
 

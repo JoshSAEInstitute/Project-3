@@ -21,7 +21,7 @@ public class Spawner : MonoBehaviour
     private void Update()
     {
         //Spawn rate depends on spawning radius
-        spawnRate = radius / 50;
+        spawnRate = radius / 1000;
 
         if(nextSpawn < Time.time)
         {

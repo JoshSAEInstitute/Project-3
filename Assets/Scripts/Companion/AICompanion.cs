@@ -162,23 +162,18 @@ public class AICompanion : MonoBehaviour
                         waitTime -= Time.deltaTime;
                     }
                     lockOnLocation = inventory.ingredients[rand];
-                    //Moves towards the locked on item
-                    if (lockOnLocation != null)
-                    {
-                        transform.LookAt(lockOnLocation.position);
-                        transform.position = Vector3.MoveTowards(this.transform.position, lockOnLocation.position, speed * Time.deltaTime);
-                    }
-
                 }
 
-                if(inventory.ingredients.Count == 0)
+                //Moves towards the locked on item
+                if (lockOnLocation != null)
                 {
-                    FacePlayer();
+                    transform.LookAt(lockOnLocation.position);
+                    transform.position = Vector3.MoveTowards(this.transform.position, lockOnLocation.position, speed * Time.deltaTime);
                 }
 
 
                 //--- RECALL
-                if(distanceFromPlayer >= wayTooFar)
+                if (distanceFromPlayer >= wayTooFar)
                 {
                     companionState = behaviour.recall;
                 }

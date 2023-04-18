@@ -7,7 +7,7 @@ public class Campfire : MonoBehaviour
 
     [SerializeField] private int ingredientsAmount;
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
 
         //This checks the amount of collectibles the player has as soon as they enter in range

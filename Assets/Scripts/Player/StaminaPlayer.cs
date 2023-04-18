@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class StaminaPlayer : MonoBehaviour
 {
@@ -37,6 +38,9 @@ public class StaminaPlayer : MonoBehaviour
             //Update hunger Bar
             currentStamina = maxStamina;
             staminaBar.SetStamina(currentStamina);
+        } else if(currentStamina <= 0 && food.food <= 0)
+        {
+            SceneManager.LoadScene("You died");
         }
 
         if(waitTime <= 0)

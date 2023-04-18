@@ -5,17 +5,21 @@ using UnityEngine.SceneManagement;
 
 public class Escape : MonoBehaviour
 {
+
     private Spawner spawner;
+
+    private Transform player;
 
     private void Awake()
     {
+        player = GameObject.FindGameObjectWithTag("Player").transform;
         spawner = GameObject.FindGameObjectWithTag("ItemSpawner").GetComponent<Spawner>();
     }
 
     private void OnEnable()
     {
-        spawner.itemX = this.transform.position.x;
-        spawner.itemY= this.transform.position.y;
+        float distanceFromPlayer = Vector2.Distance(player.position, transform.position);
+        spawner.radius = distanceFromPlayer + 50f;
     }
 
     private void OnTriggerEnter(Collider other)

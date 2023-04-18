@@ -2298,9 +2298,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemToSpawn: {fileID: 8804911822547147675, guid: a023e2de199847041963144c4c7fd311, type: 3}
   numSpawns: 10
-  spawnRate: 0.1
-  itemX: 50
-  itemY: 50
+  spawnRate: 1
+  radius: 50
 --- !u!4 &882675122
 Transform:
   m_ObjectHideFlags: 0

@@ -163,7 +163,7 @@ public class AICompanion : MonoBehaviour
                     }
                     lockOnLocation = inventory.ingredients[rand];
                     //Moves towards the locked on item
-                    if(lockOnLocation != null)
+                    if (lockOnLocation != null)
                     {
                         transform.LookAt(lockOnLocation.position);
                         transform.position = Vector3.MoveTowards(this.transform.position, lockOnLocation.position, speed * Time.deltaTime);
